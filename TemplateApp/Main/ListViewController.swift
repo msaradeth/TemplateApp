@@ -14,16 +14,18 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     static func create(with viewModel: ProductViewModel) -> ListViewController {
         let listViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
-        listViewController.viewModel = ProductViewModel(products: [], productService: ProductService())
+        listViewController.viewModel = viewModel
         return listViewController
     }    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        viewModel.loadData { [weak self] in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.loadData { [weak self] in
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             }
         }
     }
@@ -36,7 +38,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()

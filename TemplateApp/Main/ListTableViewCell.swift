@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListTableViewCell: UITableViewCell, LoadImageService {
+class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var thumbNailImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -16,7 +16,7 @@ class ListTableViewCell: UITableViewCell, LoadImageService {
     func configure(product: Product, viewModel: ProductViewModel) {
         nameLabel.text = product.name
         descriptionLabel.text = product.description
-        loadImageService(urlString: product.thumbnailUrlString, completion: { (image) in
+        viewModel.loadImage(urlString: product.thumbnailUrlString, completion: { (image) in
             DispatchQueue.main.async { [weak self] in
                 self?.thumbNailImage.image = image
             }

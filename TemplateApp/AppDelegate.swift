@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let listViewController = ListViewController.create(with: ProductViewModel(products: [], productService: ProductService()))
+        let listViewController = ListViewController.create(with: ProductViewModel(products: [], productService: ProductService(), loadImageService: LoadImageService()))
         let navController = NavController(rootViewController: listViewController)
 
         window = UIWindow(frame: UIScreen.main.bounds)

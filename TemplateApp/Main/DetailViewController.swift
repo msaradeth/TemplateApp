@@ -16,6 +16,13 @@ class DetailViewController: UIViewController {
     var product: Product!
     var viewModel: ProductViewModel!
     
+    static func create(with product: Product, viewModel: ProductViewModel) -> DetailViewController {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        vc.product = product
+        vc.viewModel = viewModel
+        return vc
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionLabel.text = product.description

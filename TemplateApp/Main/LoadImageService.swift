@@ -1,5 +1,5 @@
 //
-//  Protocols.swift
+//  LoadImageService.swift
 //  TemplateApp
 //
 //  Created by Mike Saradeth on 11/3/19.
@@ -8,11 +8,8 @@
 
 import UIKit
 
-
-protocol LoadImageService {
-    func loadImageService(urlString: String, completion: @escaping (UIImage?)->())
-}
-extension LoadImageService {
+class LoadImageService: NSObject {
+    
     func loadImageService(urlString: String, completion: @escaping (UIImage?)->()) {
         DispatchQueue.global(qos: .userInteractive).async {
             guard let url = URL(string: urlString),
